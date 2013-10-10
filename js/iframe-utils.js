@@ -34,7 +34,7 @@
 
       var result = {};
 
-      if (!iframeUtils.isEmbedded()) {
+      if (!iframeUtils.isEmbeddedIframe()) {
         return result;
       }
 
