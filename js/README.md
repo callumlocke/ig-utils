@@ -1,6 +1,6 @@
 # IG Utils
 
-A collection of utility libraries for going common interactive graphic things.
+A collection of front-end utility libraries for going common interactive graphic things.
 
 ## Installation
 
@@ -27,3 +27,10 @@ i.e.
   <script src="another-script.js"></script>
 </body>
 ```
+
+## Usage
+
+### iframe-utils.js
+
+This is useful when you interactive is going to be embedded as an iframe into an ft.com page
+
