@@ -133,6 +133,11 @@
     },
 
     resizeZeroParentFrameValuesToContent: function resizeZeroParentFrameValuesToContent() {
+
+      if (!iframeUtils.isEmbeddedIframe()) {
+        return;
+      }
+
       var currentFrameSize = iframeUtils.getParentFrameSize();
       var w = currentFrameSize.width;
       var h = currentFrameSize.height;
