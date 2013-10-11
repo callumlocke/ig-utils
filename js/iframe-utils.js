@@ -8,16 +8,30 @@
 
   var iframeUtils = window.IG.iframeUtils = {
 
+    /** 
+    * Returns true if this window been loaded as an iframe into another document.
+    */
     isEmbeddedIframe: function isEmbeddedIframe() {
       return isEmbedded;
     },
 
+    /**
+    * Set the document.domain to 'ft.com' if we're in a live environment
+    */
     setDocumentDomain: function setDocumentDomain() {
       if (document.domain && /ft\.com$/.test(document.domain)) {
         document.domain = 'ft.com';
       }
     },
 
+    /**
+    * Set the target of links by adding a `<base>` element to the `<head>` element.
+    * The `target` attribute of the base element will be set to value of the target param.
+    * 
+    * Common values: `'_blank'`, `'_parent'`, `'_top'`
+    *
+    * @param {String} target
+    */
     targetLinks: function targetLinksToParent(target) {
       if (!iframeUtils.isEmbeddedIframe() || document.getElementsByTagName('base').length) {
         return;
@@ -28,6 +42,17 @@
       document.getElementsByTagName('head')[0].appendChild(base);
     },
 
+    /**
+    * Gets the size of the iframe in the parent window.document
+    * 
+    * Pass `false` as the first param to prevent calling `getComputedStyle` on the
+    * parent window - this will cause a document reflow.
+    *
+    * However, `getComputedStyle` will only be called if the iframe does not have explicit dimensions - via a stylesheet,
+    * the `style` attribute or the `width` and `height` attributes. This should in most cases be set to prevent jank.
+    * 
+    * @param {Boolean} allowCompute
+    */
     getParentFrameSize: function getParentFrameSize(allowCompute) {
 
       allowCompute = typeof allowCompute === 'boolean' ? allowCompute : true;
@@ -63,6 +88,10 @@
 
     },
 
+    /**
+    * Removes visibility and display styles for the iframe element
+    * corresponding to this window.
+    */
     showParentFrame: function hideParentFrame() {
 
       if (!iframeUtils.isEmbeddedIframe()) {
@@ -75,6 +104,9 @@
       s.visibility = '';
     },
 
+    /**
+    * Hide the iframe element on the parent document.
+    */
     hideParentFrame: function hideParentFrame() {
 
       if (!iframeUtils.isEmbeddedIframe()) {
@@ -86,6 +118,9 @@
       s.visibility = 'hidden';
     },
 
+    /**
+    * Get the width of the content of the current document
+    */
     getContentWidth: function getContentWidth() {
       var body = document.body,
           html = document.documentElement;
@@ -97,6 +132,9 @@
       );
     },
 
+    /**
+    * Get the height of the content of the current document
+    */
     getContentHeight: function getContentWidth() {
       var body = document.body,
           html = document.documentElement;
@@ -108,6 +146,10 @@
       );
     },
 
+    /**
+    * Get the width and height of the content of the current document.
+    * Returns an object e.g. `{width: 100, height: 100}`
+    */
     getContentSize: function getContentSize () {
       return {
         width: iframeUtils.getContentWidth(),
@@ -120,6 +162,10 @@
       iframeUtils.resizeParentFrameToContentSize();
     },
 
+    /**
+    * Measures the content of this document and then resizes the iframe of the parent
+    * document to be the same size.
+    */
     resizeParentFrameToContentSize: function resizeParentFrameToContentSize() {
 
       if (!iframeUtils.isEmbeddedIframe()) {
@@ -132,6 +178,17 @@
       s.width = dim.width + 'px';
     },
 
+    /**
+    * Looks up the dimensions of iframe on the parent document. For each of these
+    * dimensions, if the value is undefined or is zero (`0`) then the iframe is resized
+    * along that dimension to fit the content in the current document.
+    *
+    * The dimensions with values > 0 are left as defined on the iframe. i.e. no resizing
+    * happens along these dimensions.
+    *
+    * If both dimensions of the iframe are 0 or undefined then the behaviour of this method
+    * is the same as that of `resizeParentFrameToContentSize`.
+    */
     resizeZeroParentFrameValuesToContent: function resizeZeroParentFrameValuesToContent() {
 
       if (!iframeUtils.isEmbeddedIframe()) {
