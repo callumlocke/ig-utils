@@ -1,6 +1,6 @@
-/*global Handlebars:true  */
+/*global Handlebars:true, console:true  */
 
-'use strict';
+"use strict";
 
 Handlebars.createGlobalHelper = function(name, hash, commands) {
   commands = commands || {};
@@ -48,3 +48,24 @@ Handlebars.registerHelper('href', function (text) {
 
   return text;
 });
+
+/*
+  reference:: http://blog.teamtreehouse.com/handlebars-js-part-3-tips-and-tricks
+  usage:: {{debug}}
+  output::  Current Context
+            ====================
+            --variables--
+            ====================
+*/
+Handlebars.registerHelper("debug", function(optionalValue) {
+  console.log("Current Context");
+  console.log("====================");
+  console.log(this);
+
+  if (optionalValue) {
+    console.log("Value");
+    console.log("====================");
+    console.log(optionalValue);
+  }
+});
+
