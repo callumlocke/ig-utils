@@ -49,6 +49,15 @@ Handlebars.registerHelper('href', function (text) {
   return text;
 });
 
+Handlebars.registerHelper('linebreaks', function (text) {
+  if (!text) {
+    return '';
+  }
+
+  var html = Handlebars.Utils.escapeExpression(text).replace(/\n/g, '<br>');
+
+  return new Handlebars.SafeString(html);
+});
 /*
   reference:: http://blog.teamtreehouse.com/handlebars-js-part-3-tips-and-tricks
   usage:: {{debug}}
