@@ -19,8 +19,18 @@
     * Set the document.domain to 'ft.com' if we're in a live environment
     */
     setDocumentDomain: function setDocumentDomain() {
-      if (document.domain && /ft\.com$/.test(document.domain)) {
-        document.domain = 'ft.com';
+      var parentDomain;
+      if (!isEmbedded) return;
+
+      try{
+        parentDomain = window.parent.document.domain;
+      } catch(e) {
+        document.domain = location.hostname;;
+        try{
+          parentDomain = window.parent.document.domain;
+        } catch(e2) {
+          document.domain = 'ft.com';
+        }
       }
     },
 
