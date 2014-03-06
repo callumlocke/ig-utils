@@ -1,7 +1,7 @@
 {
   "name": "ig-utils",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.1.0",
   "main": ["js/iframe-utils.js"],
   "ignore": [
     ".jshintrc",
