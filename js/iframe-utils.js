@@ -25,7 +25,7 @@
       try{
         parentDomain = window.parent.document.domain;
       } catch(e) {
-        document.domain = location.hostname;;
+        document.domain = location.hostname;
         try{
           parentDomain = window.parent.document.domain;
         } catch(e2) {
