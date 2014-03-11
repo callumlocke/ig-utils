@@ -20,6 +20,9 @@ var iframeUtils = require('../bower_components/ig-utils/js/iframe-utils');
 iframeUtils.setDocumentDomain();
 ```
 
+If you include `iframe-utils.js` directly in your page with a `<script>` element, it will attach itself to `window.IG.iframeUtils`.
+
+
 ### handlebars-utils.js
 
 This module doesn't export anything – you just need to `require` it and it will register some Handlebars helpers.
