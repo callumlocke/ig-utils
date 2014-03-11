@@ -1,6 +1,6 @@
-/*global Handlebars:true, console:true  */
+'use strict';
 
-"use strict";
+var Handlebars = require('hbsfy/runtime');
 
 Handlebars.createGlobalHelper = function(name, hash, commands) {
   commands = commands || {};
@@ -66,15 +66,14 @@ Handlebars.registerHelper('linebreaks', function (text) {
             --variables--
             ====================
 */
-Handlebars.registerHelper("debug", function(optionalValue) {
-  console.log("Current Context");
-  console.log("====================");
+Handlebars.registerHelper('debug', function(optionalValue) {
+  console.log('Current Context');
+  console.log('====================');
   console.log(this);
 
   if (optionalValue) {
-    console.log("Value");
-    console.log("====================");
+    console.log('Value');
+    console.log('====================');
     console.log(optionalValue);
   }
 });
-
